@@ -17,7 +17,7 @@ const dbConfig = {
 const connection = mysql.createPool(dbConfig);
 
 // Function to create an account
-const createAccount = require('../api/database_functions/queries');
+const {createAccount} = require('../api/database_functions/queries');
 
 // Testing using Mocha and Chai
 describe('createAccount function', () => {
@@ -49,50 +49,50 @@ describe('createAccount function', () => {
     });
   });
 
-  describe('login function', () => {
-    it('should log in without errors', async () => {
-      // Test data
-      const username = 'testuser';
-      const password = 'password123';
-  
-      // Call the login function
-      const result = await login(connection, username, password);
-  
-      // Check the result
-      expect(result).to.deep.equal(/* your expected result */);
-      // Add more assertions if needed
-    });
+describe('login function', () => {
+  it('should log in without errors', async () => {
+    // Test data
+    const username = 'testuser';
+    const password = 'password123';
+
+    // Call the login function
+    const result = await login(connection, username, password);
+
+    // Check the result
+    expect(result).to.deep.equal(/* your expected result */);
+    // Add more assertions if needed
   });
-  
-  describe('pollCompletedRides function', () => {
-    it('should poll completed rides without errors', async () => {
-      // Test data
-      const userId = 1;
-  
-      // Call the pollCompletedRides function
-      const result = await pollCompletedRides(connection, userId);
-  
-      // Check the result
-      expect(result).to.deep.equal(/* your expected result */);
-      // Add more assertions if needed
-    });
+});
+
+describe('pollCompletedRides function', () => {
+  it('should poll completed rides without errors', async () => {
+    // Test data
+    const userId = 1;
+
+    // Call the pollCompletedRides function
+    const result = await pollCompletedRides(connection, userId);
+
+    // Check the result
+    expect(result).to.deep.equal(/* your expected result */);
+    // Add more assertions if needed
   });
-  
-  describe('getNumRiders function', () => {
-    it('should get the number of riders without errors', async () => {
-      // Test data
-      const rideId = 1;
-  
-      // Call the getNumRiders function
-      const result = await getNumRiders(connection, rideId);
-  
-      // Check the result
-      expect(result).to.deep.equal(/* your expected result */);
-      // Add more assertions if needed
-    });
+});
+
+describe('getNumRiders function', () => {
+  it('should get the number of riders without errors', async () => {
+    // Test data
+    const rideId = 1;
+
+    // Call the getNumRiders function
+    const result = await getNumRiders(connection, rideId);
+
+    // Check the result
+    expect(result).to.deep.equal(/* your expected result */);
+    // Add more assertions if needed
   });
+});
 
 // Close the MySQL connection pool after testing
 after(() => {
-  connection.end();
+connection.end();
 });
