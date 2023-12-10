@@ -17,7 +17,9 @@ const connection = mysql.createPool(dbConfig);
 const {createAccount, login, pollCompletedRides, 
 getNearbyRides, createDriverInfo, getNumRiders,
 completeRide, removeRiderRequest, markRideAsActive, grabActiveRide,
-deletePendingRiders, getPendingRideByRide, deletePendingRide, 
+getCreatedRidesByDriver, getRequestingRidersByRid, getRideStartPoint,
+getAccountInfo, getPendingRideStatus, resolveRiderRequest, sendRiderRequest,
+getAcceptedRidersByRide, deletePendingRiders, getPendingRideByRide, deletePendingRide, 
 riderPickedUp, ridesAwaitingPickup, createNewRide} = require('../api/database_functions/queries');
 
 
@@ -240,12 +242,203 @@ describe('*Delete Pending Rides function*', () => {
   });
 }); 
 
+describe('*Accepting Ride by Ride function*', () => {
+  it('should show acccepted rides without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+
+    getAcceptedRidersByRide(connection, testrideid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*GetAccountInfo function*', () => {
+  it('should show account info without errors', (done) => {
+    // Test data
+    const testuserid = 67;
+
+    getAccountInfo(connection, testuserid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*Get Pending Ride Status function*', () => {
+  it('should show pending ride status without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+
+    getPendingRideStatus(connection, testrideid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+
 describe('*Pending Ride by Ride function*', () => {
   it('should show pending rides without errors', (done) => {
     // Test data
     const testrideid = 67;
 
     getPendingRideByRide(connection, testrideid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*SendRiderRequest function*', () => {
+  it('should show pending rides without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+    const testuserid = 100;
+    const testridestartpoint = '';
+    const testriderstartpoint = '';
+  
+    sendRiderRequest(connection, testuserid, testrideid, testridestartpoint, 
+      testriderstartpoint, testriderstartpoint)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*Get Ride Start Point function*', () => {
+  it('should show ride start points without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+
+    getRideStartPoint(connection, testrideid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*Resolve Rider Request function*', () => {
+  it('should resolve rider request without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+    const testriderid = 101;
+
+    resolveRiderRequest(connection, testrideid, testriderid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+
+describe('*Get Created Rides by Driver function*', () => {
+  it('should show created rides by driver without errors', (done) => {
+    // Test data
+    const testdriverid = 100;
+
+    getCreatedRidesByDriver(connection, testdriverid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*Get Requesting Riders by R_ID function*', () => {
+  it('should show requesting riders without errors', (done) => {
+    // Test data
+    const testrideid = 67;
+
+    getRequestingRidersByRid(connection, testrideid)
       .then((result) => {
       // Print the result
       console.log('Given Response', result);
