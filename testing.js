@@ -17,8 +17,8 @@ const connection = mysql.createPool(dbConfig);
 const {createAccount, login, pollCompletedRides, 
 getNearbyRides, createDriverInfo, getNumRiders,
 completeRide, removeRiderRequest, markRideAsActive, grabActiveRide,
-deletePendingRiders, getPendingRideByRide,
-riderPickedUp, ridesAwaitingPickup} = require('../api/database_functions/queries');
+deletePendingRiders, getPendingRideByRide, deletePendingRide, 
+riderPickedUp, ridesAwaitingPickup, createNewRide} = require('../api/database_functions/queries');
 
 
   describe('*createAccount function*', () => {
@@ -99,10 +99,41 @@ describe('*pollCompletedRides function*', () => {
   });
 }); 
 
+describe('*createNewRide function*', () => {
+  it('should create a new ride in the database', async () => {
+    // Test data
+    const testRideId = 1;
+    const testDriverId = 100;
+    const testStartPoint = 'Point A';
+    const testDriverDest = 'Point B';
+    const testRiders = 3;
+    const testCostPerRider = 10;
+    const testPickupDist = 5;
+    const testRideStartTime = new Date(); // Assuming ride start time is a Date object
+
+    try {
+      const result = await createNewRide(connection, testRideId, testDriverId, testStartPoint,
+        testDriverDest, testRiders,testCostPerRider, testPickupDist, testRideStartTime);
+
+      // Print the result
+      console.log('Given Response:', result);
+
+      // You can add assertions here if needed
+
+    } catch (err) {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Fail the test if an error occurs
+      throw err;
+    }
+  });
+});
+
 describe('*Get Nearby Rides function*', () => {
   it('should be able to find nearby rides without errors', (done) => {
     // Test data
-    const user_point = 0;
+    const user_point = 'Laurel Street';
     const maxPrice = 8.00;
 
     getNearbyRides(connection, user_point, maxPrice)
@@ -372,6 +403,29 @@ describe('*ridesAwaitingPickup function*', () => {
   });
 }); 
 
+describe('*deletePendingRide function*', () => {
+  it('should count the amount of rides waiting without errors', (done) => {
+    // Test data
+    const testrideid = 1;
+    const testdriverid = 100;
+
+    deletePendingRide(connection, testrideid, testdriverid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
 
 
 
