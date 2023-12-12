@@ -51,6 +51,8 @@ riderPickedUp, ridesAwaitingPickup, createNewRide} = require('../api/database_fu
     });
 });
 
+
+
   describe('*login function*', () => {
     it('should retrieve user_id without errors', (done) => {
 
@@ -145,11 +147,11 @@ describe('*createNewRide function*', () => {
     // Test data
     const testRideId = 2;
     const testDriverId = 100;
-    const testStartPoint = 'Point A';
-    const testDriverDest = 'Point B';
+    const testStartPoint = 'University of California Santa Cruz, Santa Cruz, CA, USA:36.9905, 122.0584';
+    const testDriverDest = 'Capitola Mall, Capitola, CA, USA: 36.9757837,-121.9669047';
     const testRiders = 3;
     const testCostPerRider = 10;
-    const testPickupDist = 5;
+    const testPickupDist = 100000000;
     const testRideStartTime = new Date(); // Assuming ride start time is a Date object
 
     try {
@@ -225,9 +227,9 @@ describe('*pollCompletedRides by Driver function*', () => {
 describe('*Get Nearby Rides function*', () => {
   it('should be able to find nearby rides without errors', (done) => {
     // Test data
-    const userstart_point = ('Point A',8);
-    const userend_point = ('Point B', 4);
-    const user_maxdist = 2
+    const userstart_point = 'Lighthouse Field State Beach, Santa Cruz, CA, USA:36.95339480000001,-122.0288273';
+    const userend_point = 'EndPoint:36.957292,-122.0571037';
+    const user_maxdist = 1000000000;
     const maxPrice = 8.00;
 
     getNearbyRides(connection, userstart_point, userend_point, user_maxdist, maxPrice,)
@@ -583,7 +585,7 @@ describe('*complete rider function*', () => {
 }); 
 
 
-describe('*Delete Pending Rides function*', () => {
+describe('*Delete Pending Riders function*', () => {
   it('should delete Pending Rides without errors', (done) => {
     // Test data
     const testrideid = 2;
@@ -607,7 +609,7 @@ describe('*Delete Pending Rides function*', () => {
 }); 
 
 
-describe('*deletePendingRide function*', () => {
+describe('*Delete Pending Rides function*', () => {
   it('should count the amount of rides waiting without errors', (done) => {
     // Test data
     const testrideid = 2;
