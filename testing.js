@@ -450,6 +450,57 @@ describe('*SendRiderRequest function*', () => {
   });
 }); 
 
+describe('*Remove Rider function*', () => {
+  it('should remove rider request without errors', (done) => {
+    // Test data
+    const testuserid = 101;
+    const testrideid = 2;
+
+    removeRiderRequest(connection, testuserid, testrideid)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
+describe('*SendRiderRequest function*', () => {
+  it('should show pending rides without errors', (done) => {
+    // Test data
+    const testrideid = 2;
+    const testuserid = 101;
+    const testridestartpoint = 'Lighthouse Field State Beach, Santa Cruz, CA, USA:36.95339480000001,-122.0288273';
+    const testriderstartpoint = 'EndPoint:36.957292,-122.0571037';
+  
+    sendRiderRequest(connection, testuserid, testrideid, testridestartpoint, 
+      testriderstartpoint, testriderstartpoint)
+      .then((result) => {
+      // Print the result
+      console.log('Given Response', result);
+
+      // Done with the test
+      done();
+    })
+    .catch((err) => {
+      // Print the error
+      console.error('Given Error:', err);
+
+      // Done with the test
+      done();
+    });
+  });
+}); 
+
 describe('*Get Requesting Riders by R_ID function*', () => {
   it('should show requesting riders without errors', (done) => {
     // Test data
@@ -521,6 +572,7 @@ describe('*Resolve Rider Request function*', () => {
     });
   });
 }); 
+
 
 
 
@@ -597,9 +649,9 @@ describe('grabActiveRide function', () => {
 describe('*ridesAwaitingPickup function*', () => {
   it('should count the amount of rides waiting without errors', (done) => {
     // Test data
-    const testrideid = 2;
+    const testriderid = 101;
 
-    ridesAwaitingPickup(connection, testrideid)
+    ridesAwaitingPickup(connection, testriderid)
       .then((result) => {
       // Print the result
       console.log('Given Response', result);
@@ -621,8 +673,9 @@ describe('*riderPickedUp function*', () => {
   it('should count the amount of riders picked without errors', (done) => {
     // Test data
     const testrideid = 2;
+    const testriderid = 101;
 
-    riderPickedUp(connection, testrideid)
+    riderPickedUp(connection, testrideid, testriderid)
       .then((result) => {
       // Print the result
       console.log('Given Response', result);
@@ -714,33 +767,6 @@ describe('*pollCompletedRides by Driver function*', () => {
     });
   });
 }); 
-
-
-
-describe('*Remove Rider function*', () => {
-  it('should remove rider request without errors', (done) => {
-    // Test data
-    const testuserid = 100;
-    const testrideid = 1;
-
-    removeRiderRequest(connection, testuserid, testrideid)
-      .then((result) => {
-      // Print the result
-      console.log('Given Response', result);
-
-      // Done with the test
-      done();
-    })
-    .catch((err) => {
-      // Print the error
-      console.error('Given Error:', err);
-
-      // Done with the test
-      done();
-    });
-  });
-}); 
-
 
 
 // ********************************************************************************* // 
