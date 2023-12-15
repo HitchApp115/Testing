@@ -1,6 +1,3 @@
-// Install required packages:
-// npm install mysql mocha chai
-
 const mysql = require('mysql');
 const chai = require('chai');
 const expect = chai.expect;
@@ -935,10 +932,11 @@ describe('delete Rider Account function', () => {
       try {
           const result = await deleteAccount(connection, testUserId);
           // Print the result
-          console.log('Given Response', result);
+          console.log('Hey Danielle!', result);
       } catch (err) {
           // Print the error
           console.error('Given Error:', err);
+          
           // Fail the test if an error occurs
           throw err;
       } finally {
@@ -958,4 +956,3 @@ after((done) => {
     done();
   });
 });
-
